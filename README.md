@@ -6,7 +6,9 @@
 
 - Must to add `secret, var` in your remote repository
 
-1. Create directory .github/workflow
+## Configuration
+
+1. Create directory .github/workflows
 2. Create file.yml
 3. Add configure below to your file.yml
 
@@ -20,7 +22,7 @@ pull_request:
 branches: ['master']
 
 env:
-IMAGE_NAME: ecocupid-api-prod-repo
+IMAGE_NAME: image-name
 TAG: latest
 
 jobs:
