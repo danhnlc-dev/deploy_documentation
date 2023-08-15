@@ -1,6 +1,6 @@
 # Deployment Document
 
-The documentation describes the way deploy your application to production environment.
+- The documentation describes the way deploy your application to production environment.
 
 ## Prerequisites and Summaries
 
@@ -9,25 +9,25 @@ The documentation describes the way deploy your application to production enviro
 
 ## Conecting to the VPS
 
-To connect your VPS server, you can use your server IP, you can create a root password and enter the server with your IP address and password credentials. But the more secure way is using an SSH key.
+- To connect your VPS server, you can use your server IP, you can create a root password and enter the server with your IP address and password credentials. But the more secure way is using an SSH key.
 
 ### Generating SSH Key
 
-Note: You can use the Terminal / Shell of your cloud provider to connect to the VPS server
+- Note: You can use the Terminal / Shell of your cloud provider to connect to the VPS server
 
 1. Launch the Terminal app in your devices.
 2. There are two commonly used algorithms for generating authentication keys:
 
-Note: You can choose one of them to generate your ssh key.
+- Note: You can choose one of them to generate your ssh key.
 
-Ed25519 – a more modern algorithm with a smaller standard key size of 256 bits. It is just as secure and efficient as an RSA key due to its strong cryptographic properties. The compatibility is lower, but newer operating systems support it.
+#### Ed25519 – a more modern algorithm with a smaller standard key size of 256 bits. It is just as secure and efficient as an RSA key due to its strong cryptographic properties. The compatibility is lower, but newer operating systems support it.
 
 ```bash
 ssh-keygen -t ed25519
 
 ```
 
-RSA – an SSH RSA key is considered highly secure as it has typically larger key sizes, often 2048 or 4096 bits. It is also more compatible with older operating systems.
+#### RSA – an SSH RSA key is considered highly secure as it has typically larger key sizes, often 2048 or 4096 bits. It is also more compatible with older operating systems.
 
 ```bash
 ssh-keygen -t rsa
@@ -39,13 +39,13 @@ ssh-keygen -t rsa
 5. Confirm your passphrase to finish SSH Keygen.
 6. View your ssh key with command (replace your location path):
 
-Ed25519
+#### Ed25519
 
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
 
-RSA
+#### RSA
 
 ```bash
 cat ~/.ssh/id_rsa.pub
@@ -317,7 +317,7 @@ Synctax
     }
 ```
 
-Make sure reload nginx after change configuration
+- Make sure reload nginx after change configuration
 
 ```
  systemctl reload nginx
@@ -341,7 +341,7 @@ cp -r build/* /usr/share/nginx/html
 
 ### Installing and configure Firewall
 
-Note: Make sure allow ssh connect before running command `sudo ufw enable`
+- Note: Make sure allow ssh connect before running command `sudo ufw enable`
 
 ```
 sudo apt install ufw
@@ -373,7 +373,9 @@ sudo ufw status verbose
  nano /etc/nginx/sites-available/custom_app
 ```
 
-`server_name example.com www.example.com;`
+```
+server_name example.com www.example.com;
+```
 
 ### SSL Certification
 
