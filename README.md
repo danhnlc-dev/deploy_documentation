@@ -16,20 +16,21 @@
 name: Deploy to AWS ECR
 
 on:
-push:
-branches: ['master']
-pull_request:
-branches: ['master']
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+
 
 env:
-IMAGE_NAME: image-name
-TAG: latest
+  IMAGE_NAME: ecocupid-ui-prod-repo
+  TAG: latest
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
-steps: - name: Using github runner repo
-uses: actions/checkout@v3
+  deploy:
+    runs-on: ubuntu-latest
+    steps: - name: Using github runner repo
+    uses: actions/checkout@v3
 
       - name: Set short commit id for tag trace
         id: vars
