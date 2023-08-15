@@ -23,7 +23,7 @@ on:
 
 
 env:
-  IMAGE_NAME: ecocupid-ui-prod-repo
+  IMAGE_NAME: image-name
   TAG: latest
 
 jobs:
