@@ -15,24 +15,25 @@
 name: Deploy CICD with AWS ECR and AWS Fargate
 
 on:
-push:
-branches: ['master']
-pull_request:
-branches: ['master']
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
 
 env:
-ECS_CLUSTER: cluster-name
-ECS_SERVICE: service-name
-ECS_TASK_DEFINITION: task-definition-name
-IMAGE_NAME: image-name
-CONTAINER_NAME: container-name
-TAG: latest
+  ECS_CLUSTER: cluster-name
+  ECS_SERVICE: service-name
+  ECS_TASK_DEFINITION: task-definition-name
+  IMAGE_NAME: image-name
+  CONTAINER_NAME: container-name
+  TAG: latest
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
-steps: - name: Using github runner repo
-uses: actions/checkout@v3
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Using github runner repo
+      uses: actions/checkout@v3
 
       - name: Set short commit id for tag trace
         id: vars
