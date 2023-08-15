@@ -29,8 +29,9 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps: - name: Using github runner repo
-    uses: actions/checkout@v3
+    steps:
+      - name: Using github runner repo
+      uses: actions/checkout@v3
 
       - name: Set short commit id for tag trace
         id: vars
