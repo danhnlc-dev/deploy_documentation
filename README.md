@@ -6,22 +6,60 @@ Switch to other branch to get your goals
 
 ## NODEJS
 
+- Common Dockerfile
+
 ```bash
-# Stage 1
-FROM node:18-alpine as build-step
+FROM node:18-alpine
 RUN mkdir -p /app
 WORKDIR /app
-# ENV
 ENV NODE_OPTIONS="--max-old-space-size=8192"
 ENV APP_ENVIRONMENT=""
 ENV PORT=""
 ENV TIMEZONE=""
-#
 EXPOSE 3000
 COPY package.json .
 RUN npm install --verbose
 COPY . .
 CMD [ "npm", "start" ]
+```
+
+- More Security and optimize build size for production
+
+```bash
+# Pin specific version for stability
+# Use slim for reduced image size
+FROM node:19.6-bullseye-slim AS base
+
+# Specify working directory other than /
+WORKDIR /usr/src/app
+
+# Copy only files required to install
+# dependencies (better layer caching)
+COPY package*.json ./
+
+FROM base as production
+
+# Set NODE_ENV
+ENV NODE_ENV production
+
+# Install only production dependencies
+# Use cache mount to speed up install of existing dependencies
+RUN --mount=type=cache,target=/usr/src/app/.npm \
+  npm set cache /usr/src/app/.npm && \
+  npm ci --only=production
+
+# Use non-root user
+# Use --chown on COPY commands to set file permissions
+USER node
+
+# Copy the healthcheck script
+COPY --chown=node:node . .
+
+# Indicate expected port
+EXPOSE 3000
+
+# Specific your command to run app
+CMD [ "npm", "run", "start" ]
 ```
 
 ## REACT APP WITH NGINX
